@@ -1,6 +1,7 @@
 package com.luv2code.springdemo.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -27,6 +28,12 @@ public class CRMLoggingAspect {
 	@Before("forAppFlow()")
 	public void before(JoinPoint theJP) {
 		System.out.println("@Before : calling method is : " + theJP.getSignature().toShortString());
+	}
+	
+	@AfterReturning(pointcut="forAppFlow()", returning="result")
+	public void before(JoinPoint theJP, Object result) {
+		System.out.println("@AfterReturning : calling method is : " + theJP.getSignature().toShortString());
+		System.out.println("The returned value for this method is : " + result);
 	}
 	
 }
